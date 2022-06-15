@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.name.mapper.MemberMapper">
+
+
+	<sql id="memberColumns">
+		idx,
+		name
+	</sql>
+	
+	<insert id="save" parameterType="com.name.domain.Member">
+		INSERT INTO tb_name (
+					name
+		) VALUES (
+					
+					#{name}
+		)	
+	</insert>
+	
+	<select id="findById" parameterType="long" resultType="Member">
+		SELECT
+					<include refid="memberColumns"/>
+		FROM
+					tb_name
+		WHERE
+					idx=#{idx}
+	
+	</select>
+	
+	<select id="findByOne" resultType="Member">
+		SELECT
+					<include refid="memberColumns"/>
+		FROM
+					tb_name
+		WHERE
+					idx=2
+		limit 1
+	
+	</select>
+	
+	
+	<select id="findByName" parameterType="string" resultType="com.name.domain.Member">
+		SELECT
+					<include refid="memberColumns"/>
+		FROM
+					tb_name
+		WHERE
+					name=#{name}
+		
+	</select>
+	
+	<select id="findAll" parameterType="com.name.domain.Member" resultType="Member">
+		SELECT
+					<include refid="memberColumns"/>
+		FROM
+					tb_name
+		order BY
+					idx DESC
+	</select>
+	
+	<select id="pagingSample" parameterType="com.name.paging.Criteria" resultType="Member">
+		SELECT
+					<include refid="memberColumns"/>
+		FROM
+					tb_name
+		where 1=1
+		
+		
+			<if test="keyword != null">
+			and asdasd like '%${keyword}%'
+			</if> 
+			
+		order BY
+					idx DESC
+		limit 		
+					#{startPage}, #{recordsPerPage}
+	</select>
+	
+</mapper>

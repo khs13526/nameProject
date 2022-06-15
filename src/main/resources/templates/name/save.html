@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="EUC-KR">
+<title>This page is a save page</title>
+
+<script>
+
+
+fetch('/api/user').then(res => {
+	console.log("res",res.json().then(r => {console.log(r) }));
+	
+
+})
+</script>
+
+</head>
+<body>
+	<h2>Welcome Spring Boot!</h2>
+	<div th:each="item : ${list}">
+		<div th:text="${item.idx}"></div>
+		<div th:text="${item.name}"></div>
+	</div>
+	<span th:text="${n}">여기는 이름입니다.</span>
+</body>
+</html>
